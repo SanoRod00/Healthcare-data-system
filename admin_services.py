@@ -7,16 +7,14 @@ from typing import Optional
 DB_PATH = "healthcare.db"
 
 
-# ------------------------------
 # DATABASE CONNECTION
-# ------------------------------
+
 def get_conn():
     return sqlite3.connect(DB_PATH)
 
 
-# ------------------------------
 # INITIALIZE DATABASE
-# ------------------------------
+
 def init_db():
     if os.path.exists(DB_PATH):
         return
@@ -139,9 +137,8 @@ def init_db():
     print("Database initialized with default admin/doctor/patient.")
 
 
-# ----------------------------------------------------------
 # USER REGISTRATION
-# ----------------------------------------------------------
+
 def register_user(username: str, password: str, role: str, full_name: str) -> Optional[int]:
     conn = get_conn()
     c = conn.cursor()
@@ -170,9 +167,8 @@ def register_user(username: str, password: str, role: str, full_name: str) -> Op
         conn.close()
 
 
-# ----------------------------------------------------------
 # LOGIN
-# ----------------------------------------------------------
+
 def authenticate(username: str, password: str) -> Optional[dict]:
     conn = get_conn()
     c = conn.cursor()
@@ -196,9 +192,8 @@ def authenticate(username: str, password: str) -> Optional[dict]:
     return None
 
 
-# ----------------------------------------------------------
 # PATIENT FUNCTIONS
-# ----------------------------------------------------------
+
 def get_patient_row_by_user_id(user_id: int):
     conn = get_conn()
     c = conn.cursor()
@@ -253,9 +248,8 @@ def get_patient_appointments(patient_id: int):
     return rows
 
 
-# ----------------------------------------------------------
 # DOCTOR FUNCTIONS
-# ----------------------------------------------------------
+
 def doctor_profile(user):
     conn = get_conn()
     c = conn.cursor()
@@ -293,10 +287,8 @@ def doctor_get_appointments(doctor_id: int):
     conn.close()
     return rows
 
-
-# ----------------------------------------------------------
 # LOGIN HANDLER
-# ----------------------------------------------------------
+
 def login():
     print("\n====== LOGIN ======")
     username = input("Username: ")
@@ -312,9 +304,8 @@ def login():
     return None
 
 
-# ----------------------------------------------------------
 # PATIENT DASHBOARD
-# ----------------------------------------------------------
+
 def patient_dashboard(user):
     profile = patient_profile(user)
 
@@ -356,10 +347,8 @@ def patient_dashboard(user):
         else:
             print("Invalid option\n")
 
-
-# ----------------------------------------------------------
 # DOCTOR DASHBOARD
-# ----------------------------------------------------------
+
 def doctor_dashboard(user):
     profile = doctor_profile(user)
 
